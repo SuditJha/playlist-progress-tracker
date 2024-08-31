@@ -2,5 +2,5 @@
     "singleQuote": false,
     "bracketSpacing": true,
     "tabWidth": 4,
-    "semi": true,
+    "semi": true
 }
