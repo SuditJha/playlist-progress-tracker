@@ -1,1 +1,1 @@
-# playlist-progress-tracker
+# Playlist Progress Tracker
