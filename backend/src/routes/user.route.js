@@ -12,7 +12,7 @@ import {
     getCurrentUser,
     updateAccountDetails,
     updateUserAvatar,
-
+    getUserPlaylists,
 } from "../controllers/user.controller.js";
 
 
@@ -38,5 +38,7 @@ router.route("/update-avatar").put(
     upload.fields([{ name: "avatar", maxCount: 1 }]),
     updateUserAvatar
 )
+
+router.route("/playlists").get(verifyJWT, getUserPlaylists)
 
 export default router;

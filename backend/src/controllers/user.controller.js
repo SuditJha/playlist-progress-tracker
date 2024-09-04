@@ -8,6 +8,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 // Services
 import { uploadOnCloudinary } from "../services/cloudinary.service.js";
+import { Playlist } from "../models/playlist.model.js";
 
 
 
@@ -212,6 +213,8 @@ const updateUserAvatar = asyncHandler(async (req, res, next) => {
         throw new ApiError(500, "Error uploading avatar")
     }
 
+    //TODO: Delete old avatar from cloudinary
+
     const user = await User.findByIdAndUpdate(req.user?._id,
         {
             $set: { avatar: avatar.url }
@@ -223,6 +226,12 @@ const updateUserAvatar = asyncHandler(async (req, res, next) => {
         .json(new ApiResponse(200, user, "User Avatar Updated Successfully"))
 })
 
+const getUserPlaylists = asyncHandler(async (req, res, next) => {
+    const playlists = await Playlist.find({ owner: req.user._id })
+    return res.status(200).json(new ApiResponse(200, playlists, "User Playlists Fetched Successfully"))
+})
+
+
 export {
     registerUser,
     loginUser,
@@ -232,4 +241,5 @@ export {
     getCurrentUser,
     updateAccountDetails,
     updateUserAvatar,
+    getUserPlaylists,
 }
